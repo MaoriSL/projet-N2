@@ -1,8 +1,8 @@
-<button><a href='/'>🏛 Accueil</a></button>
+<button class="btn btn-primary m-xl-2"><a class="text-white text-decoration-none" href='/'>🏛 Accueil</a></button>
 @auth
     @if (Auth::user())
-        <button><a href="{{route("liste")}}">📋 Scenes</a></button>
+        <button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{route("liste")}}">📋 Scenes</a></button>
     @endif
 @endauth
-<button><a href="{{route("apropos")}}">💬 A propos</a></button>
-<button><a href="{{route("contact")}}">📞 Contact</a></button>
+<button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{route("apropos")}}">💬 A propos</a></button>
+<button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{route("contact")}}">📞 Contact</a></button>
