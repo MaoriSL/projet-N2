@@ -46,10 +46,15 @@ class User extends Authenticatable
     ];
 
     public function scenes(){
-        return $this->hasMany('App\Models\Scene', 'auteur_id');
+        return $this->hasMany(Scene::class, 'auteur_id');
     }
     public function comments(){
-        return $this->hasMany('App\Models\Comment', 'auteur_id');
+        return $this->hasMany(Comment::class, 'auteur_id');
+    }
+    public function notes(){
+        return $this->belongsToMany(Scene::class, 'notes')
+            ->withPivot('value')
+            ->withTimestamps();
     }
 
 }

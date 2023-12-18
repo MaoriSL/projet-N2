@@ -15,6 +15,11 @@ class Scene extends Model
     public function comments(){
         return $this->hasMany('App\Models\Comment');
     }
+    public function notes(){
+        return $this->belongsToMany(User::class, 'notes')
+            ->withPivot('value')
+            ->withTimestamps();
+    }
 
     use HasFactory;
 }
