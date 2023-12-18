@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'admin',
+        'avatar',
     ];
 
     /**
@@ -42,4 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function scenes(){
+        return $this->hasMany(Scene::class, 'auteur_id');
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class, 'auteur_id');
+    }
+    public function notes(){
+        return $this->belongsToMany(Scene::class, 'notes')
+            ->withPivot('value')
+            ->withTimestamps();
+    }
+
 }
