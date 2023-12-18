@@ -1,4 +1,13 @@
-<html lang="fr">
+<x-layout>
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="wrap">
         <form class="login-form" action="{{route('register')}}" method="post">
             @csrf
@@ -34,4 +43,4 @@
             <p><a href="{{route('accueil')}}">Retour à la page principale</a></p>
         </div>
     </div>
-</html>>
+</x-layout>

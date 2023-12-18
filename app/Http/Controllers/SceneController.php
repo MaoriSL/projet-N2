@@ -10,7 +10,7 @@ class SceneController extends Controller
     public function index()
     {
         $scenes = Scene::all(['nom', 'equipe', 'created_at', 'vignette_link']);
-        return view('scenes.index', compact('scenes'));
+        return view('liste', ['scenes' => $scenes]);
     }
 
     public function filterByTeam($team)

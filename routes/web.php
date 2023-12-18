@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SceneController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -16,8 +17,9 @@ use Laravel\Fortify\Features;
 
 Route::get('/', function () {
     return view('accueil');
-});
+})->name('accueil');
 
+Route::get('/liste',[SceneController::class ,'index'])->name('liste');
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/apropos', 'apropos')->name('apropos');
 Route::view('/contact', 'contact')->name('contact');
