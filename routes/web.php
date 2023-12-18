@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
 });
+
+Route::view('/home', 'home')->middleware('auth');
+Route::view('/apropos', 'apropos')->name('apropos');
+Route::view('/contact', 'contact')->name('contact');
+Route::post('/contact', function (Illuminate\Http\Request $request) {
+    return view('contact-confirm', $request->all());
+})->name('contact.submit');
