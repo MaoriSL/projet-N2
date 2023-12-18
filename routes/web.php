@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Features;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,12 @@ Route::view('/contact', 'contact')->name('contact');
 Route::post('/contact', function (Illuminate\Http\Request $request) {
     return view('contact-confirm', $request->all());
 })->name('contact.submit');
+
+Route::get('/home', function (){
+    return view('home');
+})->middleware('auth');
+
+if(Features::enabled(Features::registration())) {
+    Route::view('/register', 'auth.register')->name('register');
+}
+Route::view('/login', 'auth.login')->name('login');
