@@ -4,25 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\Scene;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class SceneController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $scenes = Scene::all(['nom', 'equipe', 'created_at', 'vignette_link']);
-        return view('liste', ['scenes' => $scenes]);
+        $cat = $request->input('cat', 'All');
+        $value = $request->cookie('cat', null);
+
+        if (!isset($cat)) {
+            if (!isset($value)) {
+                $scenes = Scene::all();
+                $cat = 'All';
+                Cookie::expire('cat');
+            } else {
+                $scenes = Scene::where('equipe', $value)->get();
+                $cat = $value;
+                Cookie::queue('cat', $cat, 10);            }
+        } else {
+            if ($cat == 'All') {
+                $scenes = Scene::all();
+                Cookie::expire('cat');
+            } else {
+                $scenes = Scene::where('equipe', $cat)->get();
+                Cookie::queue('cat', $cat, 10);
+            }
+        }
+        $teams = $this->getTeams();
+        return view('liste', ['scenes' => $scenes, 'teams' => $teams, 'cat' => $cat]);
     }
 
-    public function filterByTeam($team)
+    public function getTeams()
     {
-        $scenes = Scene::where('equipe', $team)->get(['nom', 'equipe', 'created_at', 'vignette_link']);
-        return view('scenes.index', compact('scenes'));
+        $teams = Scene::select('equipe')->distinct()->get();
+        return $teams;
     }
 
     public function recentScenes()
     {
         $scenes = Scene::orderBy('created_at', 'desc')->take(5)->get(['nom', 'equipe', 'created_at', 'vignette_link']);
-        return view('scenes.index', compact('scenes'));
+        return view('liste', compact('scenes'));
     }
 
     public function topRatedScenes()
@@ -35,6 +57,6 @@ class SceneController extends Controller
             ->take(5)
             ->values();
 
-        return view('scenes.index', compact('scenes'));
+        return view('liste', compact('scenes'));
     }
 }

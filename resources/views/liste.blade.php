@@ -1,6 +1,15 @@
 <x-layout>
     <div class="container">
         <h1>Liste des scènes</h1>
+        <form method="GET" action="{{ route('liste') }}">
+            <select name="cat">
+                <option value="All">Filtrer par équipe</option>
+                @foreach($teams as $team)
+                    <option value="{{ $team->equipe }}">{{ $team->equipe }}</option>
+                @endforeach
+            </select>
+            <button type="submit">Filtrer</button>
+        </form>
         @foreach($scenes as $scene)
             <div class="scene">
                 <h2>{{ $scene->nom }}</h2>
