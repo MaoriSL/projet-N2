@@ -5,11 +5,13 @@
             <li><a href="{{ route('register') }}">Register</a></li>
         @endguest
         @auth
-            <li>Bonjour {{ Auth::user()->name }}</li>
-            <li><a href="{{ route('logout') }}">Logout</a></li>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
+            <div>
+                <li>Bonjour {{ Auth::user()->name }}</li>
+                <button><a href="#" id="logout">Logout</a></button>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </div>
             <script>
                 document.getElementById('logout').addEventListener("click", (event) => {
                     document.getElementById('logout-form').submit();
