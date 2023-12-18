@@ -1,4 +1,4 @@
-<html lang="fr">
+<x-layout>
     <div class="wrap">
         <form class="login-form" action="{{route('login')}}" method="post">
             @csrf
@@ -22,4 +22,4 @@
             </div>
         </form>
     </div>
-</html>
+</x-layout>
