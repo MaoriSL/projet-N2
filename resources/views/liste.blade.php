@@ -8,7 +8,9 @@
                     <option value="{{ $team->equipe }}">{{ $team->equipe }}</option>
                 @endforeach
             </select>
-            <button type="submit">Filtrer</button>
+            <button type="submit" name="filter" value="team">Filtrer</button>
+            <button type="submit" name="filter" value="recent">Récents</button>
+            <button type="submit" name="filter" value="note">Note</button>
         </form>
         @foreach($scenes as $scene)
             <div class="scene">
