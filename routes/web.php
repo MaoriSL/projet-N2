@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SceneController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
@@ -39,6 +40,9 @@ Route::view('/login', 'auth.login')->name('login');
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+
 
 Route::get('/liste/{id}', [SceneController::class,'show'])->name('liste.show');
 
