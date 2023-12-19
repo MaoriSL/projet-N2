@@ -12,35 +12,27 @@ class SceneController extends Controller
 {
     public function index(Request $request)
     {
+        $filter = $request->input('filter');
         $cat = $request->input('cat', 'All');
-        $value = $request->cookie('cat', null);
 
-        if (!isset($cat)) {
-            if (!isset($value)) {
-                $scenes = Scene::all();
-                $cat = 'All';
-                Cookie::expire('cat');
-            } else {
-                $scenes = Scene::where('equipe', $value)->get();
-                $cat = $value;
-                Cookie::queue('cat', $cat, 10);            }
-        } else {
-            if ($cat == 'All') {
-                $scenes = Scene::all();
-                Cookie::expire('cat');
-            } else {
+        switch ($filter) {
+            case 'recent':
+                $scenes = Scene::orderBy('created_at', 'desc')->take(5)->get();
+                break;
+            case 'note':
+                // à compléter
+                break;
+            case 'team':
                 $scenes = Scene::where('equipe', $cat)->get();
-                Cookie::queue('cat', $cat, 10);
-            }
+                break;
+            default:
+                $scenes = Scene::all();
+                break;
         }
-        $teams = $this->getTeams();
-        return view('liste', ['scenes' => $scenes, 'teams' => $teams, 'cat' => $cat]);
-    }
 
-    public function getTeams()
-    {
         $teams = Scene::select('equipe')->distinct()->get();
-        return $teams;
+
+        return view('liste', ['scenes' => $scenes, 'teams' => $teams, 'cat' => $cat]);
     }
 
     public function recentScenes()
