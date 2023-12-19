@@ -20,7 +20,12 @@ class SceneController extends Controller
                 $scenes = Scene::orderBy('created_at', 'desc')->take(5)->get();
                 break;
             case 'note':
-                // à compléter
+                $scenes = Scene::select('scenes.*')
+                    ->leftJoin('notes', 'scenes.id', '=', 'notes.scene_id')
+                    ->groupBy('scenes.id')
+                    ->orderByRaw('AVG(notes.value) DESC')
+                    ->take(5)
+                    ->get();
                 break;
             case 'team':
                 $scenes = Scene::where('equipe', $cat)->get();
