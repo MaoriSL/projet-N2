@@ -56,5 +56,8 @@ class User extends Authenticatable
             ->withPivot('value')
             ->withTimestamps();
     }
+    public function favorites(){
+        return $this->belongsToMany(Scene::class, 'favorites');
+    }
 
 }
