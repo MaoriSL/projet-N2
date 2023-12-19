@@ -47,8 +47,9 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $favorites = $user->favorites()->get();
+        $comments = $user->comments()->get();
 
-        return view('profile', ['user' => $user, 'favorites' => $favorites]);
+        return view('profile', ['user' => $user, 'favorites' => $favorites, 'comments' => $comments]);
     }
 
 }
