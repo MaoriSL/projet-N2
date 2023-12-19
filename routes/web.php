@@ -44,3 +44,7 @@ Route::get('/liste/{id}', [SceneController::class,'show'])->name('liste.show');
 Route::post('/liste/{id}/remove', [SceneController::class,'removeFavoris'])->name('favoris.remove');
 
 Route::post('/liste/{id}/add', [SceneController::class,'addFavoris'])->name('favoris.add');
+
+Route::post('/profile/avatar', [App\Http\Controllers\ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+
+Route::post('/profile/avatar/delete', [App\Http\Controllers\ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
