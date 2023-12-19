@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(SceneSeeder::class);
         $this->call(CommentSeeder::class);
-//        $this->call(NoteSeeder::class);
+        $this->call(NoteSeeder::class);
     }
 }

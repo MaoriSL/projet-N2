@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Scene;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class SceneController extends Controller
@@ -58,5 +59,29 @@ class SceneController extends Controller
             ->values();
 
         return view('liste', compact('scenes'));
+    }
+
+    public function show($id)
+    {
+        $scenes = Scene::findOrFail($id);
+        $noteMoy = $scenes->notes->avg('pivot.value');
+        $comments = $scenes->comments()->orderBy('created_at', 'desc')->get();
+        if(Auth::check()){
+            $isFavorite = Auth::user()->favorites()->where('scene_id', $id)->exists();
+            return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'comments' => $comments, 'isFavorite' => $isFavorite]);
+        }
+        return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'comments' => $comments]);
+    }
+    public function removeFavoris($id){
+        $user = Auth::user();
+        $user->favorites()->detach($id);
+
+        return back();
+    }
+    public function addFavoris($id){
+        $user = Auth::user();
+        $user->favorites()->attach($id);
+
+        return back();
     }
 }
