@@ -31,8 +31,11 @@ Route::get('/home', function (){
     return view('home');
 })->middleware('auth');
 
-Route::get('/liste/{id}',[SceneController::class,'show'])->name('liste.show');
+if(Features::enabled(Features::registration())) {
+    Route::view('/register', 'auth.register')->name('register');
+}
+Route::view('/login', 'auth.login')->name('login');
 
-Route::post('/liste/{id}/removeFavoris', [SceneController::class,'removeFavoris'])->name('favoris.remove');
-
-Route::post('/liste/{id}/addFavoris', [SceneController::class,'addFavoris'])->name('favoris.add');
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
