@@ -43,4 +43,12 @@ class ProfileController extends Controller
         return back()->with('success', 'Avatar supprimé avec succès');
     }
 
+    public function show()
+    {
+        $user = Auth::user();
+        $favorites = $user->favorites()->get();
+
+        return view('profile', ['user' => $user, 'favorites' => $favorites]);
+    }
+
 }

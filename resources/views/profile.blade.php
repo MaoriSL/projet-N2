@@ -15,4 +15,14 @@
         </form>
     </div>
     <p>Inscrit depuis le {{ Auth::user()->created_at->format('d-m-Y') }}</p>
+
+    <h2 class="mt-5">Mes scènes favorites</h2>
+    @foreach($favorites as $favorite)
+        <div>
+            <a href="{{route('liste.show', $favorite->id)}}"><h3>{{ $favorite->nom }}</h3></a>
+            <p>Équipe: {{ $favorite->equipe }}</p>
+            <p>Date d'ajout: {{ $favorite->created_at->format('d/m/Y') }}</p>
+            <img src="{{ $favorite->vignette_link }}" alt="Vignette de la scène">
+        </div>
+    @endforeach
 </x-layout>
