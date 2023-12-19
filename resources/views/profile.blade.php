@@ -7,7 +7,11 @@
         <form action="{{ route('profile.updateAvatar') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="file" name="avatar" accept="image/*">
-            <button class="form-button" type="submit">Modifier l'avatar</button>
+            <button class="btn btn-info" type="submit">Modifier l'avatar</button>
+        </form>
+        <form action="{{ route('profile.deleteAvatar') }}" method="POST">
+            @csrf
+            <button class="btn btn-danger m-xl-2" type="submit">Supprimer l'avatar</button>
         </form>
     </div>
     <p>Inscrit depuis le {{ Auth::user()->created_at->format('d-m-Y') }}</p>
