@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\SceneController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
