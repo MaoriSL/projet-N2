@@ -1,6 +1,8 @@
 <h1> Voici les commandes à effectuer pour lancer le site web : </h1>
 <p>composer install</p>
+<p>npm install</p>
 <h2> -- définir et remplir la base de données </h2>
+<p>touch database/database.sqlite</p>
 <p>php artisan migrate:fresh</p>
 <p>php artisan db:seed</p>
 
