@@ -49,12 +49,37 @@
                         <button type="submit">Update</button>
                     </form>
                 @endauth
-                @foreach($comments as $comment)
-                    <div class="comment">
-                        <h2 class="titreComment">{{ $comment->titre }}</h2>
-                        <p>{{ $comment->text }}</p><br>
+                {{-- Affichage des commentaires --}}
+                <div>
+                    <h4>Commentaires :</h4>
+                    <ul>
+                        @foreach($comments as $comment)
+                            <h3>{{ $comment->titre }}</h3>
+                            <li>{{ $comment->auteur_id }}</li>
+                            <li>{{ $comment->created_at }}</li>
+                            <li>{{ $comment->text }}</li>
+
+                            {{-- Ajoutez le bouton Modifier uniquement si l'utilisateur est l'auteur --}}
+                            @auth
+                                @if(Auth::id() == $comment->auteur_id or Auth::user()->admin)
+                                    <form action="{{ route('comment.edit', ['id' => $comment->id]) }}" method="GET" style="display: inline;">
+                                        <button type="submit" class="btn btn-warning">Modifier</button>
+                                    </form>
+                                    <form action="{{ route('comment.destroy', ['id' => $comment->id]) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                @endif
+                            @endauth
+                        @endforeach
+                    </ul>
+                </div>
+                @auth
+                    <div>
+                        <a href="{{ route('comment.create', ['id' => $scenes->id]) }}" class="btn btn-primary">Ajouter un commentaire</a>
                     </div>
-                @endforeach
+                @endauth
             </div>
         @else
         <h1>Une erreur est survenue</h1>

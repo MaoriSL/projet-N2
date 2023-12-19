@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SceneController;
@@ -55,3 +56,13 @@ Route::put('/liste/{id}/notes', [NoteController::class,'update'])->name('note.up
 Route::post('/profile/avatar', [App\Http\Controllers\ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
 
 Route::post('/profile/avatar/delete', [App\Http\Controllers\ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
+
+Route::delete('/liste/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
+
+Route::get('/liste/{id}/create', [CommentController::class,'create'])->name('comment.create');
+
+Route::put('/liste/{id}/update', [CommentController::class,'update'])->name('comment.update');
+
+Route::get('/liste/{id}/edit', [CommentController::class,'edit'])->name('comment.edit');
+
+Route::post('liste/{id}', [CommentController::class,'store'])->name('comment.store');
