@@ -39,3 +39,9 @@ Route::view('/login', 'auth.login')->name('login');
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
+
+Route::get('/liste/{id}', [SceneController::class,'show'])->name('liste.show');
+
+Route::post('/liste/{id}/remove', [SceneController::class,'removeFavoris'])->name('favoris.remove');
+
+Route::post('/liste/{id}/add', [SceneController::class,'addFavoris'])->name('favoris.add');
