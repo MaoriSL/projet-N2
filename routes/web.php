@@ -46,6 +46,8 @@ Route::post('/liste/{id}/remove', [SceneController::class,'removeFavoris'])->nam
 
 Route::post('/liste/{id}/add', [SceneController::class,'addFavoris'])->name('favoris.add');
 
+Route::put('/liste/{id}/notes', [NoteController::class,'update'])->name('note.update');
+
 Route::post('/profile/avatar', [App\Http\Controllers\ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
 
 Route::post('/profile/avatar/delete', [App\Http\Controllers\ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
