@@ -59,4 +59,12 @@ class SceneController extends Controller
 
         return view('liste', compact('scenes'));
     }
+
+    public function show($id)
+    {
+        $scenes = Scene::findOrFail($id);
+        $noteMoy = $scenes->notes->avg('pivot.value');
+        $comments = $scenes->comments()->orderBy('created_at', 'desc')->get();
+        return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'comments' => $comments]);
+    }
 }
