@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center vh-100 mt-5">
         <div class="wrap w-25 h-50 mt-5 border-dark p-5 bg-dark text-white rounded">
             <h1 class="text-center">Contactez-nous</h1>
-            <form class="contact-form" action="{{ route('contact.submit') }}" method="post">
+            <form action="/contact/submit" method="post">
                 @csrf
                 <div class="form-group mb-2">
                     <label for="email" class="text-bg-secondary"></label>
