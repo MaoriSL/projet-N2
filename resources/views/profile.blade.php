@@ -25,4 +25,12 @@
             <img src="{{ $favorite->vignette_link }}" alt="Vignette de la scène">
         </div>
     @endforeach
+
+    <h2 class="mt-5">Mes commentaires</h2>
+    @foreach($comments as $comment)
+        <div>
+            <p>{{ $comment->content }}</p>
+            <p>Posté le {{ $comment->created_at->format('d/m/Y') }}</p>
+        </div>
+    @endforeach
 </x-layout>
