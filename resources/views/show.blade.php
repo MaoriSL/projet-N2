@@ -1,4 +1,13 @@
 <x-layout>
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container">
         @if(!(empty($scenes)))
             @auth
@@ -31,6 +40,15 @@
                 @else
                     <p>Il n'y a pas encore de note pour cette scène</p>
                 @endif
+                @auth
+                    <form method="POST" action="{{ route('note.update', $scenes->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <label for="value">Noter ou mettez à jour la note : </label>
+                        <input type="number" id="value" name="value" min="1" max="5" required>
+                        <button type="submit">Update</button>
+                    </form>
+                @endauth
                 @foreach($comments as $comment)
                     <div class="comment">
                         <h2 class="titreComment">{{ $comment->titre }}</h2>

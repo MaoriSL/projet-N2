@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\Scene;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +65,7 @@ class SceneController extends Controller
     public function show($id)
     {
         $scenes = Scene::findOrFail($id);
-        $noteMoy = $scenes->notes->avg('pivot.value');
+        $noteMoy = Note::where('scene_id', $id)->avg('value');
         $comments = $scenes->comments()->orderBy('created_at', 'desc')->get();
         if(Auth::check()){
             $isFavorite = Auth::user()->favorites()->where('scene_id', $id)->exists();
