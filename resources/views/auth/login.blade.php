@@ -18,7 +18,7 @@
                 <button class="form-button" type="submit">Login</button>
             </div>
             <div class="form-footer">
-                Vous n'avez pas de compte ? <a href="{{route('register')}}">S'inscrire</a>
+                Vous n'avez pas de compte ? <a class="text-info" href="{{route('register')}}">S'inscrire</a>
             </div>
         </form>
     </div>

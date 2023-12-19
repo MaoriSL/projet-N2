@@ -1,7 +1,7 @@
 <nav>
     @guest
-        <button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{ route('login') }}">Login</a></button>
-        <button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{ route('register') }}">Register</a></button>
+        <button class="btn btn-primary m-xl-2"><a class="text-white text-decoration-none" href="{{ route('login') }}">Login</a></button>
+        <button class="btn btn-primary m-xl-2"><a class="text-white text-decoration-none" href="{{ route('register') }}">Register</a></button>
     @endguest
     @auth
         <div class="d-flex align-items-center">

@@ -36,11 +36,11 @@
                 <button class="form-button" type="submit">Enregistrement</button>
             </div>
             <div class="form-footer">
-                Vous avez déjà un compte ? <a href="{{route('login')}}">Connexion</a>
+                Vous avez déjà un compte ? <a class="text-info" href="{{route('login')}}">Connexion</a>
             </div>
         </form>
         <div>
-            <p><a href="{{route('accueil')}}">Retour à la page principale</a></p>
+            <p><a class="text-info" href="{{route('accueil')}}">Retour à la page principale</a></p>
         </div>
     </div>
 </x-layout>

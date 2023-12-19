@@ -8,17 +8,14 @@
     @vite(['resources/scss/app.scss','resources/css/app.css','resources/js/app.js'])
     <title>{{$titre ??"Application Laravel"}}</title>
 </head>
-<body>
+<body class="text-white">
 <header>
     <x-banner></x-banner>
 </header>
-<menu>
-    <x-header></x-header>
-</menu>
-<main>
+<main class="m-xl-3">
     {{$slot}}
 </main>
-<footer>
+<footer class="fixed-bottom d-flex justify-content-center">
     <x-footer></x-footer>
 </footer>
 </body>
