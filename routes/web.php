@@ -4,6 +4,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\SceneController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,7 @@ Route::get('/liste',[SceneController::class ,'index'])->name('liste');
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/apropos', 'apropos')->name('apropos');
 Route::view('/contact', 'contact')->name('contact');
-Route::post('/contact', function (Illuminate\Http\Request $request) {
-    return view('contact-confirm', $request->all());
-})->name('contact.submit');
+Route::post('/contact/submit', [ContactController::class, 'submit']);
 
 Route::get('/home', function (){
     return view('home');
@@ -47,4 +46,6 @@ Route::post('/liste/{id}/remove', [SceneController::class,'removeFavoris'])->nam
 
 Route::post('/liste/{id}/add', [SceneController::class,'addFavoris'])->name('favoris.add');
 
-Route::put('/liste/{id}/note', [NoteController::class,'update'])->name('note.update');
+Route::post('/profile/avatar', [App\Http\Controllers\ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+
+Route::post('/profile/avatar/delete', [App\Http\Controllers\ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');

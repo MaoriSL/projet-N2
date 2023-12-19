@@ -1,7 +1,5 @@
 <x-layout>
-    <h1>Merci pour votre soumission</h1>
-    <p>Nous avons reçu votre message et nous vous répondrons bientôt.</p>
-    <p><strong>Email:</strong> {{ $email }}</p>
-    <p><strong>Nom:</strong> {{ $name }}</p>
-    <p><strong>Message:</strong> {{ $message }}</p>
+    <h1>Merci pour votre message {{ $name }}</h1>
+    <p>Nous vous répondrons bientôt à l'adresse suivante {{ $email }}</p>
+    <p><strong>Votre message:</strong> {{ $message }}</p>
 </x-layout>
