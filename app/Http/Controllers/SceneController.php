@@ -58,13 +58,18 @@ class SceneController extends Controller
     {
         $scenes = Scene::findOrFail($id);
         $noteMoy = Note::where('scene_id', $id)->avg('value');
+        $noteMax = Note::where('scene_id', $id)->max('value');
+        $noteMin = Note::where('scene_id', $id)->min('value');
+        $noteCount = Note::where('scene_id', $id)->count();
+        $favoritesCount = $scenes->favorites()->count();
         $comments = $scenes->comments()->orderBy('created_at', 'desc')->get();
         if(Auth::check()){
             $isFavorite = Auth::user()->favorites()->where('scene_id', $id)->exists();
-            return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'comments' => $comments, 'isFavorite' => $isFavorite]);
+            return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'noteMax' => $noteMax, 'noteMin' => $noteMin, 'noteCount' => $noteCount, 'favoritesCount' => $favoritesCount, 'comments' => $comments, 'isFavorite' => $isFavorite]);
         }
-        return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'comments' => $comments]);
+        return view('show', ['scenes' => $scenes, 'noteMoy' => $noteMoy, 'noteMax' => $noteMax, 'noteMin' => $noteMin, 'noteCount' => $noteCount, 'favoritesCount' => $favoritesCount, 'comments' => $comments]);
     }
+
     public function removeFavoris($id){
         $user = Auth::user();
         $user->favorites()->detach($id);

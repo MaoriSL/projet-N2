@@ -60,4 +60,21 @@
         <h1>Une erreur est survenue</h1>
         @endif
     </div>
+    <x-stats>
+        <x-slot name="noteMoy">
+            {{ $noteMoy }}
+        </x-slot>
+        <x-slot name="noteMax">
+            {{ $noteMax }}
+        </x-slot>
+        <x-slot name="noteMin">
+            {{ $noteMin }}
+        </x-slot>
+        <x-slot name="noteCount">
+            {{ $noteCount }}
+        </x-slot>
+        <x-slot name="favoritesCount">
+            {{ $favoritesCount }}
+        </x-slot>
+    </x-stats>
 </x-layout>
