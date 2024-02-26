@@ -1,6 +1,7 @@
 <h1> Voici les commandes à effectuer pour lancer le site web : </h1>
 <p>composer install</p>
 <p>npm install</p>
+<p>composer require erusev/parsedown</p>
 <h2> -- définir et remplir la base de données </h2>
 <p>touch database/database.sqlite</p>
 <p>php artisan migrate:fresh</p>
